@@ -1,26 +1,15 @@
 #ifndef SRINTERFACE_H
 #define SRINTERFACE_H
 
-#include <global.h>
-#include <processmysql.h>
-#include <javabeen.h>
 #include <audioplayer.h>
 #include <speechsynthesis.h>
-#include <audiolevelsiodevice.h>
-#include <speechrecognizer.h>
-#include <audiolevels.h>
+#include <audiocontrol.h>
 #include <QString>
-
-class SRInterface
+#include <srinterface_global.h>
+class SRINTERFACESHARED_EXPORT SRInterface
 {
 public:
     SRInterface();
-    struct Global:: QueryResult handleSpeech(char* result);
-    int queryGoods(struct Global::QueryResult* qr, QString string);
-    int queryServer(struct Global::QueryResult* qr, QString string);
-//    void startSpeech(char* resul);
-    void SpeechStart(char* result);
-//    static void* newThreadFun(void* arg);
     //当前语音识别状态
     enum{
         ready,//语音识别在准备
@@ -28,23 +17,32 @@ public:
         stop//语音识别结束
     };
     int speechState;
-    struct Global::speech_rec* rec_record;//用来接收从录音类传来的数据
-    AudioLevelsIODevice m_device;
-    AudioLevels as;
-    SpeechRecognizer sr;
+    struct speech_rec rec;//用来接收从录音类传来的数据
+    AudioControl al;
     // 获取speechstate
     int getSpeechState();
     /**获取speech过程中，语音信号的值（用于显示声音波形图）
      * */
     float getSpeechValue();
     //获取识别结果
-    QString getSpeechResult();
-    //开始识别
-    int startSpeech();
-    //语音合成
-    int compose(QString text);
+    char* getSpeechResult();
+    /**
+     * @brief startSpeech开始识别
+     * @param login_params-登陆参数
+     * @param stt_session_begin_params－stt开始参数
+     * @return
+     */
+    int startSpeech(const char* login_params,const char* stt_session_begin_params);
+    /**
+     * @brief compose语音合成
+     * @param text－合成内容
+     * @param login_params－登陆参数
+     * @param tts_session_begin_params－tts开始参数
+     * @return
+     */
+    int compose(char* text,const char* login_params,const char* tts_session_begin_params);
     //语音播报
-    int play(QString filePath);
+    int play(char* filePath);
 };
 
 #endif // SRINTERFACE_H

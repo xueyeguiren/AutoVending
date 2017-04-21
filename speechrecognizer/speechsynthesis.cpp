@@ -5,7 +5,7 @@ SpeechSynthesis::SpeechSynthesis()
 
 }
 
-int SpeechSynthesis::StartCompose(char *content){
+int SpeechSynthesis::StartCompose(char *content,const char* login_params,const char* tts_session_begin_params){
     int ret;
     /* 用户登录 */
     ret = MSPLogin(NULL, NULL, login_params);//第一个参数是用户名，第二个参数是密码，第三个参数是登录参数，用户名和密码可在http://www.xfyun.cn注册获取
@@ -21,7 +21,7 @@ int SpeechSynthesis::StartCompose(char *content){
     printf("###########################################################################\n\n");
     /* 文本合成 */
     qDebug()<<"开始合成 ...";
-    ret = text_to_speech(content, fileName);
+    ret = text_to_speech(content, fileName,tts_session_begin_params);
     if (MSP_SUCCESS != ret)
     {
         printf("text_to_speech failed, error code: %d.\n", ret);
@@ -32,7 +32,7 @@ int SpeechSynthesis::StartCompose(char *content){
     return 0;
 }
 /* 文本合成 */
-int SpeechSynthesis:: text_to_speech(const char* src_text, const char* des_path)
+int SpeechSynthesis:: text_to_speech(const char* src_text, const char* des_path,const char* tts_session_begin_params)
 {
     int          ret          = -1;
     FILE*        fp           = NULL;

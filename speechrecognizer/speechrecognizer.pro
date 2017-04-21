@@ -1,19 +1,16 @@
 QT += qml quick multimedia sql
 
 CONFIG += c++11
-
+#TEMPLATE = lib
 SOURCES += main.cpp \
-    audiolevels.cpp \
-    audiolevelsiodevice.cpp \
-    wavepaint.cpp \
-    global.cpp \
     speechrecognizer.cpp \
     speechsynthesis.cpp \
     srinterface.cpp \
-    processmysql.cpp \
-    audioplayer.cpp
+    audioplayer.cpp \
+    audiocontrol.cpp \
 
-RESOURCES += qml.qrc
+
+RESOURCES +=
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -26,6 +23,8 @@ QML_DESIGNER_IMPORT_PATH =
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
+DEFINES += SRINTERFACE_LIBRARY
+TARGET=srinterface
 #此为电脑端
 INCLUDEPATH +=/home/mjl/Qt相关/部署量贩售卖机程序记录/语音识别/电脑识别/include
 LIBS += -lrt -ldl -lpthread -lasound  -L/home/mjl/Qt相关/部署量贩售卖机程序记录/语音识别/源码/Linux_voice_1.109/libs/x64 -lmsc
@@ -41,15 +40,13 @@ LIBS += -lrt -ldl -lpthread -lasound  -L/home/mjl/Qt相关/部署量贩售卖机
 target.path=/home/pi
 INSTALLS += target
 
+
 HEADERS += \
-    audiolevels.h \
-    audiolevelsiodevice.h \
-    wavepaint.h \
-    global.h \
     speechrecognizer.h \
-    structstore.h \
     speechsynthesis.h \
     srinterface.h \
-    processmysql.h \
-    javabeen.h \
-    audioplayer.h
+    audioplayer.h \
+    srinterface_global.h \
+    audiocontrol.h \
+    returnAndGlobal.h
+
