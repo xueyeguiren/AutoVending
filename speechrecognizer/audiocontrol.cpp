@@ -13,6 +13,8 @@ AudioControl::AudioControl( QObject *parent)
 static const int resolution =50;//分辨率滚动快慢
 int AudioControl::startRecord(const char* login_params,const char* stt_session_begin_params)
 {
+    rec.isGetSpeechResult=false;
+    rec.start=false;
     int ret;
     QAudioDeviceInfo inputDevice = QAudioDeviceInfo::defaultInputDevice();
 //    QList<QAudioDeviceInfo> qq=QAudioDeviceInfo:: availableDevices(QAudio::AudioInput);
@@ -37,12 +39,13 @@ int AudioControl::startRecord(const char* login_params,const char* stt_session_b
 
 void AudioControl::suspendRecord()
 {
+    sr.stopSession(rec.session_id);
     this->close();
     if(audioInput)
     audioInput->suspend();
     delete audioInput;
     audioInput=NULL;
-    sr.stopSession(rec.session_id);
+
 }
 
 int AudioControl::startSession(const char* login_params,const char* stt_session_begin_params)
@@ -75,14 +78,14 @@ int AudioControl::configureRecord(QAudioDeviceInfo inputDevice)
             && inputDevice.supportedSampleSizes().size() > 0
             && inputDevice.supportedCodecs().size() > 0) {
 
-        formatAudio= getDefaultFormat(inputDevice);
+        formatAudio= getDefaultFormat();
         if(!(inputDevice.isFormatSupported(formatAudio)))
         {
             qDebug()<<"没有找到合适的录音格式！";
             return REC_FAIL_FORMATNOTSUPPORT;//没有找到合适的录音格式
         }
         audioInput = new QAudioInput(inputDevice, formatAudio, this);
-        audioInput->setBufferSize(40000);
+        audioInput->setBufferSize(10000);
         this->open(QIODevice::WriteOnly);
         audioInput->start(this);
         return REC_SUCCESS_CONFIGURERECORD;
@@ -94,15 +97,13 @@ int AudioControl::configureRecord(QAudioDeviceInfo inputDevice)
 
     }
 }
-QAudioFormat AudioControl::getDefaultFormat(QAudioDeviceInfo inputDevice)
+QAudioFormat AudioControl::getDefaultFormat()
 {
     QAudioFormat formatAudio;
     formatAudio.setSampleRate(16000);
-    formatAudio.setChannelCount(inputDevice.supportedChannelCounts().at(0));
-    qDebug()<<"codec"<<inputDevice.supportedSampleSizes().at(1);//16
-    formatAudio.setSampleSize(inputDevice.supportedSampleSizes().at(1));
-    qDebug()<<"codec"<<inputDevice.supportedCodecs().at(0);
-    formatAudio.setCodec(inputDevice.supportedCodecs().at(0));
+    formatAudio.setChannelCount(1);
+    formatAudio.setSampleSize(16);
+    formatAudio.setCodec("audio/pcm");
     formatAudio.setByteOrder(QAudioFormat::LittleEndian);
     formatAudio.setSampleType(QAudioFormat::SignedInt);
     return formatAudio;
@@ -151,9 +152,10 @@ qint64 AudioControl::writeData(const char *data, qint64 maxSize)
 }
 //! [2]
 
-struct speech_rec AudioControl:: getStructRec()
+int AudioControl:: getStructRec(struct speech_rec* st_rec)
 {
-    return rec;
+    *st_rec=rec;
+    return GETSTRUCTREC_SUCCESS;
 }
 int AudioControl::startSpeech(char*data,qint64 maxSize)
 {
@@ -175,8 +177,49 @@ int AudioControl::startSpeech(char*data,qint64 maxSize)
         rec.isGetSpeechResult=true;
         rec.result=result;
         suspendRecord();
+        qDebug()<<" 获取的结果"<<rec.result;
         return STARTSPEECH_SUCCESS;//得到识别结果
     }
     rec.audio_status = MSP_AUDIO_SAMPLE_CONTINUE;//未得到识别结果
     return STARTSPEECH_CONTINUE;
 }
+
+int AudioControl::startPlayer(QString fileName)
+{
+    //读取文件各有用信息
+    qDebug()<<"startPlayerAudioPlayer"<<fileName;
+    inputFile=new QFile;
+    inputFile->setFileName(fileName);
+    bool ret=inputFile->open(QIODevice::ReadOnly);
+    qDebug()<<(inputFile);
+    if(!ret)
+    {
+        return STARTPLAYER_FILE_FAIL;
+    }
+    QAudioFormat format;
+    format= getDefaultFormat();
+    QAudioDeviceInfo info(QAudioDeviceInfo::defaultOutputDevice());
+    if (!info.isFormatSupported(format)) {
+
+      qDebug()<<"raw audio format not supported by backend, cannot play audio.";
+      return STARTPLAYER_FORMATNOTSUPPORT;
+     }
+    audio = new QAudioOutput(format,0);
+    qDebug()<<"audioOut1"<<inputFile->isReadable();
+    audio->start(inputFile);
+    qDebug()<<"audioOut2";
+    connect(audio, SIGNAL(stateChanged(QAudio::State)),this, SLOT(finishedPlaying(QAudio::State)));
+    return STARTPLAYER_SUCCESS;
+}
+void AudioControl::finishedPlaying(QAudio::State state)
+ {
+   if(state == QAudio::IdleState) {
+     audio->stop();
+     inputFile->close();
+     delete audio;
+     delete inputFile;
+     audio=NULL;
+     inputFile=NULL;
+     qDebug() << "play end!";
+   }
+ }

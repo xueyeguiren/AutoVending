@@ -46,6 +46,12 @@ int SpeechRecognizer::startSpeechRecognizer(struct speech_rec* rec,bool* isGetRe
 //退出登陆及结束会话
 int SpeechRecognizer::stopSession(const char* session_id)
 {
-    QISRSessionEnd(session_id,"normal");
+    int ret;
+    ret = QTTSSessionEnd(session_id, "Normal");
+    if (MSP_SUCCESS != ret)
+    {
+        qDebug()<<"QTTSSessionEnd failed, error code:"<<ret;
+    }
     MSPLogout();
+    qDebug()<<"stopSession";
 }

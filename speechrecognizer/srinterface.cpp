@@ -8,13 +8,17 @@ SRInterface::SRInterface()
 // 获取speechstate,只有speechstate为stop表示识别完成
 int SRInterface:: getSpeechState()
 {
-    rec=al.getStructRec();
+    int ret;
+    ret=al.getStructRec(&rec);
+    if(ret<0)
+        return GETSPEECHSTATE_FAIL;
     if(rec.isGetSpeechResult)
         speechState=stop;
     else if(rec.start)
         speechState=speeching;
-    speechState=ready;
-    qDebug()<<"getSpeechState";
+    else
+        speechState=ready;
+    qDebug()<<"getSpeechState"<<speechState;
     return this->speechState;
 }
 
@@ -23,7 +27,7 @@ int SRInterface:: getSpeechState()
  * */
 float SRInterface::getSpeechValue()
 {
-    rec=al.getStructRec();
+//    rec=al.getStructRec(&rec);
     return rec.value;
 }
 
@@ -34,21 +38,36 @@ char* SRInterface::getSpeechResult()
 }
 
 //开始识别
-int SRInterface::startSpeech(const char* login_params,const char* stt_session_begin_params)
+int SRInterface::doSpeech(const char* login_params,const char* stt_session_begin_params)
 {
-    qDebug()<<"startSpeech srinterface";
-    al.startRecord(login_params,stt_session_begin_params);
     speechState=ready;
+    int ret;
+    qDebug()<<"startSpeech srinterface";
+    ret=al.startRecord(login_params,stt_session_begin_params);
+    if(ret<0)
+    {
+        return DOSPEECH_FAIL;
+    }
+    return DOSPEECH_SUCCESS;
 }
 
 //语音合成
 int SRInterface::compose(char* text,const char* login_params,const char* tts_session_begin_params)
 {
-
+    int ret=ss.StartCompose(text,login_params,tts_session_begin_params);
+    if(ret<0)
+    {
+        return COMPOSE_FAIL;
+    }
+    return COMPOSE_SUCCESS;
 }
 
 //语音播报
 int SRInterface::play(char* filePath)
 {
-
+    int ret;
+    ret=al.startPlayer(filePath);
+    if(ret<0)
+        return PLAY_FAIL;
+    return PLAY_SUCCESS;
 }

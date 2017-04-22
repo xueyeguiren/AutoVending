@@ -11,14 +11,9 @@ int SpeechSynthesis::StartCompose(char *content,const char* login_params,const c
     ret = MSPLogin(NULL, NULL, login_params);//第一个参数是用户名，第二个参数是密码，第三个参数是登录参数，用户名和密码可在http://www.xfyun.cn注册获取
     if (MSP_SUCCESS != ret)
     {
-        printf("MSPLogin failed, error code: %d.\n", ret);
+        qDebug()<<"MSPLogin failed, error code:"<<ret;
         return ret;
     }
-    printf("\n###########################################################################\n");
-    printf("## 语音合成（Text To Speech，TTS）技术能够自动将任意文字实时转换为连续的 ##\n");
-    printf("## 自然语音，是一种能够在任何时间、任何地点，向任何人提供语音信息服务的  ##\n");
-    printf("## 高效便捷手段，非常符合信息时代海量数据、动态更新和个性化查询的需求。  ##\n");
-    printf("###########################################################################\n\n");
     /* 文本合成 */
     qDebug()<<"开始合成 ...";
     ret = text_to_speech(content, fileName,tts_session_begin_params);

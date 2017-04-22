@@ -4,8 +4,8 @@
 #include <QtCore/QIODevice>
 #include <QAudioDeviceInfo>
 #include <QAudioInput>
+#include <QAudioOutput>
 #include <speechrecognizer.h>
-
 class AudioControl: public QIODevice
 {
     Q_OBJECT
@@ -18,15 +18,21 @@ public:
     static struct audioInput_struct as;
     //配置音频
     int configureRecord(QAudioDeviceInfo inputDevice);
-    QAudioFormat getDefaultFormat(QAudioDeviceInfo inputDevice);
+    QAudioFormat getDefaultFormat();
     //打开声卡capture
     int startRecord(const char* login_params,const char* stt_session_begin_params);
-    //关闭声卡capture
+    //暂停声卡capture
     void suspendRecord();
     //开始识别
     int startSpeech(char*data,qint64 maxSize);
     //获取语音采样的数据
-    struct speech_rec getStructRec();
+    int getStructRec(struct speech_rec* st_rec);
+
+    //语音播放
+    int startPlayer(QString fileName);
+    QAudioOutput *audio;//output
+    QFile* inputFile;
+
 /**定义变量**/
     QAudioInput* audioInput;//audioinput对象
     SpeechRecognizer sr;//sr对象
@@ -35,7 +41,9 @@ protected:
     qint64 readData(char *data, qint64 maxSize);
     qint64 writeData(const char *data, qint64 maxSize);
 
-
+public slots:
+    //结束播放
+    void finishedPlaying(QAudio::State state);
 };
 
 #endif // AUDIOCONTROL_H

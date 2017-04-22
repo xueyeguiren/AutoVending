@@ -10,8 +10,23 @@
 #define STARTSESSION_SUCCESS 0;
 #define STARTSPEECH_SUCCESS 0;
 #define STARTSPEECH_FAIL -6;
+#define DOSPEECH_FAIL -7;
+#define DOSPEECH_SUCCESS 0;
 #define STARTSPEECH_CONTINUE 1;
+#define COMPOSE_FAIL -8;
+#define COMPOSE_SUCCESS 0;
 
+#define STARTPLAYER_FILE_FAIL -9;
+#define STARTPLAYER_FORMATNOTSUPPORT -10;
+#define STARTPLAYER_SUCCESS 0;
+
+#define GETSTRUCTREC_FAIL -11;
+#define GETSTRUCTREC_SUCCESS 0;
+#define GETSPEECHSTATE_FAIL -12;
+#define GETSPEECHSTATE_SUCCESS 0;
+
+#define PLAY_FAIL -13;
+#define PLAY_SUCCESS 0;
 struct speech_rec{
     const char* session_id;//session_id
     char* data;// 录音传过来的数据

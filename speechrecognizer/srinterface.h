@@ -1,7 +1,6 @@
 #ifndef SRINTERFACE_H
 #define SRINTERFACE_H
 
-#include <audioplayer.h>
 #include <speechsynthesis.h>
 #include <audiocontrol.h>
 #include <QString>
@@ -18,7 +17,9 @@ public:
     };
     int speechState;
     struct speech_rec rec;//用来接收从录音类传来的数据
-    AudioControl al;
+    AudioControl al;//控制声音播放和录音
+
+    SpeechSynthesis ss;//语音合成类
     // 获取speechstate
     int getSpeechState();
     /**获取speech过程中，语音信号的值（用于显示声音波形图）
@@ -32,7 +33,7 @@ public:
      * @param stt_session_begin_params－stt开始参数
      * @return
      */
-    int startSpeech(const char* login_params,const char* stt_session_begin_params);
+    int doSpeech(const char* login_params,const char* stt_session_begin_params);
     /**
      * @brief compose语音合成
      * @param text－合成内容

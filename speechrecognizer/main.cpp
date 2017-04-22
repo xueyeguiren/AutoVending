@@ -2,7 +2,7 @@
 #include <QtQml>
 //#include <QQmlApplicationEngine>
 #include <QCoreApplication>
-#include <global.h>
+#include <srinterface.h>
 #include <QDebug>
 #include <audiocontrol.h>
 
@@ -37,8 +37,10 @@ int main(int argc, char *argv[])
 //    Global gl;
 //    gl.setRootItem(rootItem);
 //    qDebug()<<rootItem->objectName();
-    AudioControl al;
-    int ret=al.startRecord(login_params,stt_session_begin_params);
+//    AudioControl al;
+//    int ret=al.startRecord(login_params,stt_session_begin_params);
+    SRInterface sr;
+    int ret=sr.play("/home/pi/wav/meitingdong.wav");
     qDebug()<<"ret"<<ret;
     return app.exec();
 }

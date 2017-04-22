@@ -1,12 +1,11 @@
 QT += qml quick multimedia sql
 
 CONFIG += c++11
-#TEMPLATE = lib
+TEMPLATE = lib
 SOURCES += main.cpp \
     speechrecognizer.cpp \
     speechsynthesis.cpp \
     srinterface.cpp \
-    audioplayer.cpp \
     audiocontrol.cpp \
 
 
@@ -45,8 +44,7 @@ HEADERS += \
     speechrecognizer.h \
     speechsynthesis.h \
     srinterface.h \
-    audioplayer.h \
     srinterface_global.h \
     audiocontrol.h \
-    returnAndGlobal.h
+    returnAndGlobal.h \
 
