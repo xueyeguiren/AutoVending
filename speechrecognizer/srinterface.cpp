@@ -1,6 +1,6 @@
 #include "srinterface.h"
 
-SRInterface::SRInterface()
+SRInterface::SRInterface(QObject* parent):QObject(parent)
 {
 
 }
@@ -18,7 +18,6 @@ int SRInterface:: getSpeechState()
         speechState=speeching;
     else
         speechState=ready;
-    qDebug()<<"getSpeechState"<<speechState;
     return this->speechState;
 }
 
@@ -40,7 +39,7 @@ char* SRInterface::getSpeechResult()
 //开始识别
 int SRInterface::doSpeech(const char* login_params,const char* stt_session_begin_params)
 {
-    speechState=ready;
+
     int ret;
     qDebug()<<"startSpeech srinterface";
     ret=al.startRecord(login_params,stt_session_begin_params);
@@ -70,4 +69,25 @@ int SRInterface::play(char* filePath)
     if(ret<0)
         return PLAY_FAIL;
     return PLAY_SUCCESS;
+}
+void SRInterface::slot_startRecord(const char*login_params,const char* stt_session_begin_params)
+{
+    int ret=al.startRecord(login_params,stt_session_begin_params);
+    if(ret<0)
+        qDebug()<<"打开record失败，失败代码"<<ret;
+}
+void SRInterface::slot_startPlayer(char* filePath)
+{
+    qDebug()<<"播放文件路径"<<filePath;
+    int ret=al.startPlayer(filePath);
+    if(ret<0)
+        qDebug()<<"播放音频失败，失败代码"<<ret;
+}
+
+void SRInterface::slot_stopRecord()
+{
+    SpeechRecognizer sr;
+    sr.stopSession(rec.session_id);
+    QAudioInput* audioInput=rec.audioinput;
+    audioInput->stop();
 }

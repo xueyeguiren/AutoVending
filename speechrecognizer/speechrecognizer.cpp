@@ -15,7 +15,6 @@ int SpeechRecognizer::startSession(const char* login_params,const char* stt_sess
            return ret;
         }
     *session_id = (char*)QISRSessionBegin(NULL, stt_session_begin_params, &errcode);
-    qDebug()<<"sr_session_id"<<*session_id;
     if (MSP_SUCCESS != errcode)
     {
         qDebug()<<"\nQISRSessionBegin failed! error code"<<errcode;
@@ -53,5 +52,4 @@ int SpeechRecognizer::stopSession(const char* session_id)
         qDebug()<<"QTTSSessionEnd failed, error code:"<<ret;
     }
     MSPLogout();
-    qDebug()<<"stopSession";
 }

@@ -27,6 +27,7 @@
 
 #define PLAY_FAIL -13;
 #define PLAY_SUCCESS 0;
+#include <QAudioInput>
 struct speech_rec{
     const char* session_id;//session_id
     char* data;// 录音传过来的数据
@@ -40,6 +41,8 @@ struct speech_rec{
 
     bool isGetSpeechResult;//是否得到识别的结果
     char* result;//得到的识别结果
+
+    QAudioInput* audioinput;//audioinput 指针
 };
 
 /* wav音频头部格式 */

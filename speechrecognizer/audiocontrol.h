@@ -12,6 +12,7 @@ class AudioControl: public QIODevice
 public:
 /**定义方法**/
     explicit AudioControl(QObject* parent= 0);
+    ~AudioControl();
     //开始session
     int startSession(const char* login_params,const char* stt_session_begin_params);
     //用来装着m_device,m_audioInput，结束时候用
@@ -19,10 +20,6 @@ public:
     //配置音频
     int configureRecord(QAudioDeviceInfo inputDevice);
     QAudioFormat getDefaultFormat();
-    //打开声卡capture
-    int startRecord(const char* login_params,const char* stt_session_begin_params);
-    //暂停声卡capture
-    void suspendRecord();
     //开始识别
     int startSpeech(char*data,qint64 maxSize);
     //获取语音采样的数据
@@ -44,6 +41,9 @@ protected:
 public slots:
     //结束播放
     void finishedPlaying(QAudio::State state);
+    //打开声卡capture
+    int startRecord(const char* login_params,const char* stt_session_begin_params);
+signals:
 };
 
 #endif // AUDIOCONTROL_H

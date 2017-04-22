@@ -7,7 +7,14 @@
 AudioControl::AudioControl( QObject *parent)
     :  QIODevice(parent)
 {
-
+}
+AudioControl::~AudioControl()
+{
+    if(audioInput)
+    {
+        delete audioInput;
+        audioInput=NULL;
+    }
 }
 
 static const int resolution =50;//分辨率滚动快慢
@@ -37,17 +44,6 @@ int AudioControl::startRecord(const char* login_params,const char* stt_session_b
     return REC_SUCCESS_STARTRECORD;
 }
 
-void AudioControl::suspendRecord()
-{
-    sr.stopSession(rec.session_id);
-    this->close();
-    if(audioInput)
-    audioInput->suspend();
-    delete audioInput;
-    audioInput=NULL;
-
-}
-
 int AudioControl::startSession(const char* login_params,const char* stt_session_begin_params)
 {
     int ret;
@@ -63,7 +59,6 @@ int AudioControl::startSession(const char* login_params,const char* stt_session_
         qDebug()<<"startSessionFail,错误代码"<<ret;
         return ret;
     }
-    qDebug()<<"session_id"<<session_id;
     rec.session_id=session_id;
     return STARTSESSION_SUCCESS;
      /******************************************会话off*/
@@ -88,6 +83,7 @@ int AudioControl::configureRecord(QAudioDeviceInfo inputDevice)
         audioInput->setBufferSize(10000);
         this->open(QIODevice::WriteOnly);
         audioInput->start(this);
+        rec.audioinput=audioInput;
         return REC_SUCCESS_CONFIGURERECORD;
 
     } else {
@@ -138,7 +134,6 @@ qint64 AudioControl::writeData(const char *data, qint64 maxSize)
    result=qSqrt(sum/newDataSize);
    if(result>32767)
        result=0;
-      qDebug()<<"k"<<"------------"<<result;
        value = float(result)/109.1f;
        if(value<0)
            value=(value-0.1f);
@@ -160,7 +155,6 @@ int AudioControl:: getStructRec(struct speech_rec* st_rec)
 int AudioControl::startSpeech(char*data,qint64 maxSize)
 {
     int ret;
-    qDebug()<<"startSpeech";
     rec.data=data;
     rec.length=maxSize;
     bool isGetResult;
@@ -176,8 +170,8 @@ int AudioControl::startSpeech(char*data,qint64 maxSize)
         //获取到结果了
         rec.isGetSpeechResult=true;
         rec.result=result;
-        suspendRecord();
-        qDebug()<<" 获取的结果"<<rec.result;
+//        suspendRecord();
+        this->close();
         return STARTSPEECH_SUCCESS;//得到识别结果
     }
     rec.audio_status = MSP_AUDIO_SAMPLE_CONTINUE;//未得到识别结果
@@ -191,7 +185,6 @@ int AudioControl::startPlayer(QString fileName)
     inputFile=new QFile;
     inputFile->setFileName(fileName);
     bool ret=inputFile->open(QIODevice::ReadOnly);
-    qDebug()<<(inputFile);
     if(!ret)
     {
         return STARTPLAYER_FILE_FAIL;
@@ -205,9 +198,7 @@ int AudioControl::startPlayer(QString fileName)
       return STARTPLAYER_FORMATNOTSUPPORT;
      }
     audio = new QAudioOutput(format,0);
-    qDebug()<<"audioOut1"<<inputFile->isReadable();
     audio->start(inputFile);
-    qDebug()<<"audioOut2";
     connect(audio, SIGNAL(stateChanged(QAudio::State)),this, SLOT(finishedPlaying(QAudio::State)));
     return STARTPLAYER_SUCCESS;
 }
@@ -223,3 +214,4 @@ void AudioControl::finishedPlaying(QAudio::State state)
      qDebug() << "play end!";
    }
  }
+

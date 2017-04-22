@@ -4,11 +4,13 @@
 #include <speechsynthesis.h>
 #include <audiocontrol.h>
 #include <QString>
+#include <QObject>
 #include <srinterface_global.h>
-class SRINTERFACESHARED_EXPORT SRInterface
+class SRINTERFACESHARED_EXPORT SRInterface:public QObject
 {
+    Q_OBJECT
 public:
-    SRInterface();
+    SRInterface(QObject* parent =0);
     //当前语音识别状态
     enum{
         ready,//语音识别在准备
@@ -44,6 +46,10 @@ public:
     int compose(char* text,const char* login_params,const char* tts_session_begin_params);
     //语音播报
     int play(char* filePath);
+public slots:
+    void slot_startRecord(const char*login_params,const char* stt_session_begin_params);
+    void slot_startPlayer(char* filePath);
+    void slot_stopRecord();
 };
 
 #endif // SRINTERFACE_H
