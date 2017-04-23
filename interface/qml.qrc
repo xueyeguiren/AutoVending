@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/Food.qml</file>
+        <file>qml/Key.qml</file>
+        <file>qml/main.qml</file>
+        <file>qml/Page1.qml</file>
+        <file>qml/Page1Form.ui.qml</file>
+        <file>qml/Page2.qml</file>
+        <file>qml/Page2Form.ui.qml</file>
+        <file>qml/Page3.qml</file>
+        <file>qml/Page3Form.ui.qml</file>
+        <file>qml/Page4.qml</file>
+        <file>qml/Page4Form.ui.qml</file>
+        <file>qml/Page5.qml</file>
+        <file>qml/Page5Form.ui.qml</file>
+        <file>qml/Page6.qml</file>
+        <file>qml/Page6Form.ui.qml</file>
+        <file>qml/Page7.qml</file>
+        <file>qml/Page7Form.ui.qml</file>
+        <file>qml/Pay_method.qml</file>
+        <file>qml/Yu_yin.qml</file>
+        <file>qml/But.qml</file>
+    </qresource>
+</RCC>

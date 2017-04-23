@@ -1,0 +1,68 @@
+<RCC>
+    <qresource prefix="/weather">
+        <file>images/weather/bao_xue.png</file>
+        <file>images/weather/da_xue.png</file>
+        <file>images/weather/da_yu.png</file>
+        <file>images/weather/lei_yu.png</file>
+        <file>images/weather/qing.png</file>
+        <file>images/weather/tian_bg.jpg</file>
+        <file>images/weather/wu_mai.png</file>
+        <file>images/weather/wu.png</file>
+        <file>images/weather/xiao_xue.png</file>
+        <file>images/weather/xiao_yu.png</file>
+        <file>images/weather/yin.png</file>
+        <file>images/weather/yu_bg.jpg</file>
+        <file>images/weather/yu_y1.png</file>
+        <file>images/weather/yun.png</file>
+        <file>images/weather/yun1.png</file>
+        <file>images/weather/yun2.png</file>
+        <file>images/weather/zhen_yu.png</file>
+        <file>images/weather/zhong_xue.png</file>
+        <file>images/weather/zhong_yu.png</file>
+    </qresource>
+    <qresource prefix="/operation">
+        <file>images/operation/a_07.png</file>
+        <file>images/operation/a_10.png</file>
+        <file>images/operation/a_53.png</file>
+        <file>images/operation/a_56.png</file>
+        <file>images/operation/a_58.png</file>
+        <file>images/operation/a_60.png</file>
+        <file>images/operation/a_63.png</file>
+        <file>images/operation/a1_07.png</file>
+        <file>images/operation/a1_10.png</file>
+        <file>images/operation/a1_12.png</file>
+        <file>images/operation/a1_14.png</file>
+        <file>images/operation/a1_17.png</file>
+        <file>images/operation/a1_24.png</file>
+        <file>images/operation/a2_03.png</file>
+        <file>images/operation/a2_07.png</file>
+        <file>images/operation/a4_03.png</file>
+        <file>images/operation/a4_07.png</file>
+        <file>images/operation/a5_03.png</file>
+        <file>images/operation/a5_07.png</file>
+        <file>images/operation/a5_09.png</file>
+        <file>images/operation/a5_11b8f5.png</file>
+        <file>images/operation/a5_ffbc90.png</file>
+        <file>images/operation/a6_03.png</file>
+        <file>images/operation/a7_03.png</file>
+        <file>images/operation/a7_07.png</file>
+        <file>images/operation/j.png</file>
+        <file>images/operation/jjsh.png</file>
+        <file>images/operation/sbz_03.png</file>
+        <file>images/operation/t_58.png</file>
+        <file>images/operation/yu_cg.png</file>
+        <file>images/operation/yu_sb.png</file>
+    </qresource>
+    <qresource prefix="/pay">
+        <file>images/pay/a_35.png</file>
+        <file>images/pay/zhi_fu.png</file>
+    </qresource>
+    <qresource prefix="/design">
+        <file>images/design/3支付页面2版修改.jpg</file>
+        <file>images/design/4支付成功修改.png</file>
+        <file>images/design/4支付页面修改.jpg</file>
+        <file>images/design/5支付失败修改.png</file>
+        <file>images/design/7取货成功.jpg</file>
+        <file>images/design/8取货失败页面.jpg</file>
+    </qresource>
+</RCC>

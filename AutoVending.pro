@@ -1,6 +1,6 @@
 TEMPLATE = subdirs
 SUBDIRS += \
     speechrecognizer\
-#    interface       \
+    interface       \
 #    database        \
 #    hdcommunication \
