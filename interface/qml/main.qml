@@ -6,6 +6,7 @@ ApplicationWindow {
     visible: true
     width: 540
     height: 960
+//    11
     title: qsTr("勃达自动售卖机主页")
     Rectangle{       //视频播放窗口
             id:miantop1;
