@@ -57,12 +57,5 @@
         <file>images/pay/a_35.png</file>
         <file>images/pay/zhi_fu.png</file>
     </qresource>
-    <qresource prefix="/design">
-        <file>images/design/3支付页面2版修改.jpg</file>
-        <file>images/design/4支付成功修改.png</file>
-        <file>images/design/4支付页面修改.jpg</file>
-        <file>images/design/5支付失败修改.png</file>
-        <file>images/design/7取货成功.jpg</file>
-        <file>images/design/8取货失败页面.jpg</file>
-    </qresource>
+
 </RCC>

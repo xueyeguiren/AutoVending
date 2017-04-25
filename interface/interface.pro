@@ -16,8 +16,8 @@ RESOURCES += qml.qrc \
     image.qrc
 
 #此为电脑端
-INCLUDEPATH +=/home/mjl/Qt相关/部署量贩售卖机程序记录/语音识别/电脑识别/include
-LIBS += -lrt -ldl -lpthread -lasound  -L/home/mjl/Qt相关/部署量贩售卖机程序记录/语音识别/源码/Linux_voice_1.109/libs/x64 -lmsc
+#INCLUDEPATH +=/home/mjl/Qt相关/部署量贩售卖机程序记录/语音识别/电脑识别/include
+#LIBS += -lrt -ldl -lpthread -lasound  -L/home/mjl/Qt相关/部署量贩售卖机程序记录/语音识别/源码/Linux_voice_1.109/libs/x64 -lmsc
 #此为arm端
 #INCLUDEPATH += /home/mjl/Qt相关/部署量贩售卖机程序记录/语音识别/电脑识别/include /home/mjl/build/usr/include
 #LIBS += -lrt -ldl -lpthread -L/home/mjl/build/usr/lib/arm-linux-gnueabihf/ -lasound  -L/home/mjl/Qt相关/部署量贩售卖机程序记录/语音识别/源码/Linux_voice_1.109/libs/RaspberryPi/ -lmsc
