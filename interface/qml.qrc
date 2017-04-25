@@ -21,4 +21,7 @@
         <file>qml/Yu_yin.qml</file>
         <file>qml/But.qml</file>
     </qresource>
+    <qresource prefix="/js">
+        <file>js/NetWork.js</file>
+    </qresource>
 </RCC>

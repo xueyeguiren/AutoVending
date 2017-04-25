@@ -10,6 +10,7 @@ SOURCES += main.cpp \
     get_media_path.cpp \
     food_date.cpp \
     http.cpp \
+    interfacecontrol.cpp
 
 RESOURCES += qml.qrc \
     image.qrc
@@ -48,6 +49,8 @@ HEADERS += \
     get_media_path.h \
     food_date.h \
     http.h \
+    interfacecontrol.h \
+    globalvarible.h
 
 
 
