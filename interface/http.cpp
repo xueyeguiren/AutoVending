@@ -1,5 +1,5 @@
 #include "http.h"
-
+#include <QDebug>
 http::http(QObject *parent) : QObject(parent)
 {
     imageStr = "";

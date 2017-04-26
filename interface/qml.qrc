@@ -20,8 +20,15 @@
         <file>qml/Pay_method.qml</file>
         <file>qml/Yu_yin.qml</file>
         <file>qml/But.qml</file>
+        <file>qml/RecentlyWeather.qml</file>
+        <file>qml/Weather.qml</file>
+        <file>qml/Goods.qml</file>
+        <file>qml/Goods_single.qml</file>
+        <file>qml/RowPoint.qml</file>
+        <file>qml/Point_single.qml</file>
     </qresource>
     <qresource prefix="/js">
         <file>js/NetWork.js</file>
+        <file>js/Weather.js</file>
     </qresource>
 </RCC>

@@ -46,16 +46,31 @@
         <file>images/operation/a6_03.png</file>
         <file>images/operation/a7_03.png</file>
         <file>images/operation/a7_07.png</file>
-        <file>images/operation/j.png</file>
-        <file>images/operation/jjsh.png</file>
+        <file>images/operation/goodbg.png</file>
         <file>images/operation/sbz_03.png</file>
         <file>images/operation/t_58.png</file>
         <file>images/operation/yu_cg.png</file>
         <file>images/operation/yu_sb.png</file>
+        <file>images/operation/timg.jpeg</file>
+        <file>images/operation/c_07.png</file>
+        <file>images/operation/c_10.png</file>
     </qresource>
     <qresource prefix="/pay">
         <file>images/pay/a_35.png</file>
         <file>images/pay/zhi_fu.png</file>
     </qresource>
-
+    <qresource prefix="/goods">
+        <file>images/goods/food_01.png</file>
+        <file>images/goods/food_02.png</file>
+        <file>images/goods/food_03.png</file>
+        <file>images/goods/food_04.png</file>
+        <file>images/goods/food_05.png</file>
+        <file>images/goods/food_06.png</file>
+        <file>images/goods/food_07.png</file>
+        <file>images/goods/food_08.png</file>
+        <file>images/goods/food_09.png</file>
+        <file>images/goods/food_10.png</file>
+        <file>images/goods/food_11.png</file>
+        <file>images/goods/food_12.png</file>
+    </qresource>
 </RCC>
