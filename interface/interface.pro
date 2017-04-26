@@ -23,7 +23,7 @@ RESOURCES += qml.qrc \
 #LIBS += -lrt -ldl -lpthread -L/home/mjl/build/usr/lib/arm-linux-gnueabihf/ -lasound  -L/home/mjl/Qt相关/部署量贩售卖机程序记录/语音识别/源码/Linux_voice_1.109/libs/RaspberryPi/ -lmsc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH =
+#QML_IMPORT_PATH =
 
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
