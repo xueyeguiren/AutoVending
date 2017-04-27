@@ -6,7 +6,8 @@ Rectangle{
     property alias food_price: txt_goodsPrice.text;           //食品价格
     property alias myWidth: root.width;                   //宽度
     property alias myHeight: root.height;                 //高度
-
+    property string goods_id;                             //商品id
+    property string remain_num;                           //商品剩余数量
     id:root;
     color: "#ffddb8";
     width: myWidth;
@@ -73,5 +74,22 @@ Rectangle{
             anchors.horizontalCenterOffset: root.width*0.12;
         }
 
+    }
+    MouseArea{
+        anchors.fill: parent;
+        onReleased: {
+//                app_mainInterface.visible=false;
+//                app_mainInterface.page_name="goods_pay";
+//                app_mainInterface.visible=true;
+            rec_MainINterface.destroy();
+            showB();
+//            rec_MainINterface.loadPage();
+            function showB(){
+              var component = Qt.createComponent("MainInterface.qml");
+                   if (component.status == Component.Ready) {
+                       var bQml = component.createObject(app_mainInterface,{"page_name":"goods_pay"});
+                   }
+            }
+        }
     }
 }

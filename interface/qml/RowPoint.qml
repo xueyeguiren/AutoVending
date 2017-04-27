@@ -12,7 +12,7 @@ Row{
         for(var i=1;i<=pageNum;i++){
         var component = Qt.createComponent("Point_single.qml");
         if (component.status == Component.Ready) {
-            console.log("parent.width",root.height);
+//            console.log("parent.width",root.height);
             var button;
             if(pageFocuse==i){
             button= component.createObject(root, {"picUrl":"qrc:/operation/images/operation/c_10.png"});

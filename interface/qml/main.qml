@@ -7,6 +7,7 @@ import QtQuick.Window 2.0
 import "qrc:/js/js/NetWork.js" as API
 import "qrc:/js/js/Weather.js" as WR
 ApplicationWindow {
+    id:appWindow;
     property var tt:WR.test();
     visible: true
     width: 540
@@ -22,55 +23,21 @@ ApplicationWindow {
             id:wea;
         }
     }
-
-
-
-
-    SwipeView {
-        id: rec_mainInterface
-        width: parent.width;
-        height: parent.height*0.578//1110px
-
-        anchors{
-            top:rec_ads.bottom;
-            left:parent.left;
-        }
-        Rectangle{
-//            id:rec_mainInterface;
-        color: "#ffddb8"
-            Goods{
-            id:goods;
+    Rectangle{                         //中间商品页
+            id: rec_mainInterface
             width: parent.width;
-            height: parent.height*0.923//1024x
-            anchors.top: parent.top;
-            anchors.topMargin: 24;
+            height: parent.height*0.578//1110px
+            anchors{
+                top:rec_ads.bottom;
+                left:parent.left;
             }
-            Rectangle{
-                id:rec_point;
-                height: parent.height*0.077;
+            MainInterface{
+                id:app_mainInterface;
                 width: parent.width;
-                anchors.top: goods.bottom;
-                anchors.horizontalCenter: parent.horizontalCenter;
-                color: "#ffddb8"
-                RowPoint{
-                    id:rowPoint;
-                    anchors.horizontalCenter: parent.horizontalCenter;
-                    anchors.verticalCenter: parent.verticalCenter;
-                    num:20;
-                    focusNum:1;
-                }
+                height: parent.height;
+                page_name: "goods_swipeView";
             }
-        }
-
-        Page {
-            Label {
-                text: qsTr("Second page")
-                anchors.centerIn: parent
-            }
-        }
     }
-
-
 
 
     Rectangle{        //最下方按钮
@@ -97,7 +64,6 @@ ApplicationWindow {
                     MouseArea{
                         anchors.fill: parent;
                         onPressed: {
-
                             page2.visible = false;
                             page3.visible = false;
                             page4.visible = false;

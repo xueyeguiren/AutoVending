@@ -54,6 +54,9 @@
         <file>images/operation/timg.jpeg</file>
         <file>images/operation/c_07.png</file>
         <file>images/operation/c_10.png</file>
+        <file>images/operation/b_03.png</file>
+        <file>images/operation/b_06.png</file>
+        <file>images/operation/b_10.png</file>
     </qresource>
     <qresource prefix="/pay">
         <file>images/pay/a_35.png</file>

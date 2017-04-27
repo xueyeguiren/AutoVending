@@ -26,6 +26,10 @@
         <file>qml/Goods_single.qml</file>
         <file>qml/RowPoint.qml</file>
         <file>qml/Point_single.qml</file>
+        <file>qml/GoodsSwipeView.qml</file>
+        <file>qml/MainInterface.qml</file>
+        <file>qml/GoodsAndPoint.qml</file>
+        <file>qml/GoodsPay.qml</file>
     </qresource>
     <qresource prefix="/js">
         <file>js/NetWork.js</file>
